@@ -1,8 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 :root {
-    --colorW: #fff;
+
+    /* Color pallet - 1  */
+
+    --c-p1-grey: #EEEDEB; /* grey */
+    --c-p1-peach: #E6B9A6; /* peach */
+    --c-p1-egb: #939185; /* Earthy Grey Beige */
+    --c-p1-dsb: #2F3645; /* Deep Slate Blue */
+
+    /* color pallet - 2 */
+
+    --c-p2-dmb: #070F2B; /* Deep Midnight Blue */
+    --c-p2-di: #1B1A55; /* Dark Indigo / Deep Violet-Blue */
+    --c-p2-msb: #535C91; /* Muted Slate Blue */
+    --c-p2-lp: #9290C3; /* Light Periwinkle */
+
+    /* color pallet - 3 */
+
+    --c-p3-dt: #003C43; /* Dark Teal */
+    --c-p3-dc: #135D66; /* Deep Cyan */
+    --c-p3-ssg: #77B0AA; /* Soft Seafoam Green */
+    --c-p3-pa: #E3FEF7; /* Pale Aquamarine */
+
+    /* Font Sizes */
+
+    --fs-h1: 5rem;
+    --fs-h2: 4rem;
+    --fs-h3: 3.2rem;
+    --fs-l: 2.2rem;
+    --fs-med: 1.8rem;
+    --fs-p: 1.6rem;
+    --fs-input: 1.5rem;
+    --fs-nav: 1.4rem;
+    --fs-span: 1.1rem;
+
+    /* Font Family */
+
+    --ff-p: "Poppins", serif;
+    --ff-sec: "Itim", serif;
+
+    /* Margins */
+
+    --mar-m-l: 10rem;
+    --mar-m-r: 10rem;
+    --mar-m-t: 5rem;
+    --mar-m-b: 5rem;
+
+    --mar-h-b: 1.2rem;
+    --mar-h-t: 1.2rem;
+
+    --mar-large: 2rem;
+    --mar-sm: 0.8rem;
+    --mar-exsm: 0.4rem;
+
+    /* Paddings */
+
+    --pad-m-left: 10rem;
+    --pad-m-right: 10rem;
+    --pad-m-top: 5rem;
+    --pad-m-bottom: 5rem;
+
+    --pad-h-b: 1.2rem;
+    --pad-h-t: 1.2rem;
+
+    --pad-large: 2rem;
+    --pad-sm: 0.8rem;
+    --pad-exsm: 0.4rem;
+
+}
+
+h1 {
+    font-size: var(--fs-h1);
+}
+h2 {
+    font-size: var(--fs-h2);
+}
+h3 {
+    font-size: var(--fs-h3);
+}
+p {
+    font-size: var(--fs-p);
+}
+span {
+    font-size: var(--fs-span);
+}
+nav {
+    font-size: var(--fs-nav);
+}
+input {
+    font-size: var(--fs-input);
+}
+
+.ffp {
+    font-family: var(--ff-p);
+}
+.ff-sec {
+    font-family: var(--ff-sec);
+}
+.l {
+    font-size: var(--fs-l);
+}
+.med {
+    font-size: var(--fs-med);
 }
