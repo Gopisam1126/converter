@@ -21,15 +21,19 @@
     --c-p3-ssg: #77B0AA; /* Soft Seafoam Green */
     --c-p3-pa: #E3FEF7; /* Pale Aquamarine */
 
+    --c-p-neon: #7C00FE;
+    --c-p-dsp-dark: #1E222C;
+
     /* Font Sizes */
 
     --fs-h1: 5rem;
     --fs-h2: 4rem;
     --fs-h3: 3.2rem;
+    --fs-h4: 2.7rem;
     --fs-l: 2.2rem;
     --fs-med: 1.8rem;
-    --fs-p: 1.6rem;
-    --fs-input: 1.5rem;
+    --fs-p: 1.4rem;
+    --fs-input: 1.2rem;
     --fs-nav: 1.4rem;
     --fs-span: 1.1rem;
 
@@ -45,6 +49,8 @@
     --mar-m-t: 5rem;
     --mar-m-b: 5rem;
 
+    --mar-s-l: 10rem;
+
     --mar-h-b: 1.2rem;
     --mar-h-t: 1.2rem;
 
@@ -54,10 +60,11 @@
 
     /* Paddings */
 
-    --pad-m-left: 10rem;
-    --pad-m-right: 10rem;
-    --pad-m-top: 5rem;
-    --pad-m-bottom: 5rem;
+    --pad-m-tb: 2rem;
+    --pad-m-lr: 5rem;
+
+    --pad-i-lr: 1.2rem;
+    --pad-i-tb: 0.3rem;
 
     --pad-h-b: 1.2rem;
     --pad-h-t: 1.2rem;
@@ -66,4 +73,33 @@
     --pad-sm: 0.8rem;
     --pad-exsm: 0.4rem;
 
+    /* border radius */
+    
+    --br-main: 0.8rem;
+
+}
+
+.ca-main-sec {
+    padding-top: var(--pad-m-lr);
+}
+.main-head-desc-s {
+    text-align: center;
+}
+
+.ca-m-body {
+    margin-top: 5rem;
+}
+.b-t-item {
+    background: var(--c-p-dsp-dark);
+    width: 30rem;
+    padding: 1.5rem;
+    border-radius: var(--br-main);
+}
+.b-t-item:hover {
+    scale: 1.02;
+    /* border: 1px solid var(--c-p-neon); */
+    box-shadow: 1.2rem 1.1rem 0.6rem 0.5rem var(--c-p-dsp-dark);
+}
+.b-t-head {
+    padding-bottom: 1.2rem;
 }
