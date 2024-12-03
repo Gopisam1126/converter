@@ -8,6 +8,7 @@ function ImageTypeConverter() {
     const [isOpen, setIsOpen] = useState(false);
     const [format, setFormat] = useState('jpeg');
     const [fileName, setFileName] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
 
     const options = [
         { label: "JPEG", value: "jpeg" },
@@ -27,7 +28,8 @@ function ImageTypeConverter() {
     function handleFileChange(e) {
         const file = e.target.files && e.target.files[0];
         if (file) {
-            setFileName(file.name)
+            setFileName(file.name);
+            setPreviewImage(URL.createObjectURL(file));
         }
     }
 
@@ -85,6 +87,17 @@ function ImageTypeConverter() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="prev-file-c flex-c">
+                {
+                    previewImage && (
+                        <img
+                            src={previewImage}
+                            alt="preview"
+                            className="prev-img-file"
+                        />
+                    )
+                }
             </div>
             <div className="sel-file-name">
                 {

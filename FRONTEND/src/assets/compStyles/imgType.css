@@ -88,7 +88,7 @@
 }
 
 .img-tc-form-c {
-    margin-top: 10rem;
+    margin-top: 5rem;
     justify-content: center;
     align-items: center;
 }
@@ -193,7 +193,15 @@
     border-bottom-right-radius: var(--br-main);
 }
 
+.prev-img-file {
+    width: 15rem;
+    height: 10rem;
+    transform: translate(41rem, 2rem);
+    border-radius: var(--br-main);
+    border: 1px solid var(--c-p-neon);
+}
 .file-name {
     text-align: center;
     padding-top: 1.2rem;
+    transform: translateY(2rem);
 }
