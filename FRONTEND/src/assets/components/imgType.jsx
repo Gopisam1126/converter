@@ -30,6 +30,11 @@ function ImageTypeConverter() {
         if (file) {
             setFileName(file.name);
             setPreviewImage(URL.createObjectURL(file));
+
+            const fileType = file.type.split("/")[1];
+            setFormat(fileType || "unknown");
+            console.log(fileType);
+            
         }
     }
 
