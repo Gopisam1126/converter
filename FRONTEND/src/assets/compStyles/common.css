@@ -146,6 +146,12 @@ input[type="search"]::-webkit-search-cancel-button {
     color: #000;
 }
 
+/* text properties */
+
+.txt-no-ul {
+    text-decoration: none;
+}
+
 /* margin classes */
 
 .mar-mt {

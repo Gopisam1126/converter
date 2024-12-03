@@ -1,0 +1,199 @@
+:root {
+
+    /* Color pallet - 1  */
+
+    --c-p1-grey: #EEEDEB; /* grey */
+    --c-p1-peach: #E6B9A6; /* peach */
+    --c-p1-egb: #939185; /* Earthy Grey Beige */
+    --c-p1-dsb: #2F3645; /* Deep Slate Blue */
+
+    /* color pallet - 2 */
+
+    --c-p2-dmb: #070F2B; /* Deep Midnight Blue */
+    --c-p2-di: #1B1A55; /* Dark Indigo / Deep Violet-Blue */
+    --c-p2-msb: #535C91; /* Muted Slate Blue */
+    --c-p2-lp: #9290C3; /* Light Periwinkle */
+
+    /* color pallet - 3 */
+
+    --c-p3-dt: #003C43; /* Dark Teal */
+    --c-p3-dc: #135D66; /* Deep Cyan */
+    --c-p3-ssg: #77B0AA; /* Soft Seafoam Green */
+    --c-p3-pa: #E3FEF7; /* Pale Aquamarine */
+
+    --c-p-neon: #7C00FE;
+
+    /* Font Sizes */
+
+    --fs-h1: 5rem;
+    --fs-h2: 4rem;
+    --fs-h3: 3.2rem;
+    --fs-h4: 2.7rem;
+    --fs-l: 2.2rem;
+    --fs-med: 1.8rem;
+    --fs-p: 1.4rem;
+    --fs-input: 1.2rem;
+    --fs-nav: 1.4rem;
+    --fs-span: 1.1rem;
+
+    /* Font Family */
+
+    --ff-p: "Poppins", serif;
+    --ff-sec: "Itim", serif;
+
+    /* Margins */
+
+    --mar-m-l: 10rem;
+    --mar-m-r: 10rem;
+    --mar-m-t: 5rem;
+    --mar-m-b: 5rem;
+
+    --mar-s-l: 10rem;
+
+    --mar-h-b: 1.2rem;
+    --mar-h-t: 1.2rem;
+
+    --mar-large: 2rem;
+    --mar-sm: 0.8rem;
+    --mar-exsm: 0.4rem;
+
+    /* Paddings */
+
+    --pad-m-tb: 2rem;
+    --pad-m-lr: 5rem;
+
+    --pad-i-lr: 1.2rem;
+    --pad-i-tb: 0.3rem;
+
+    --pad-h-b: 1.2rem;
+    --pad-h-t: 1.2rem;
+
+    --pad-large: 2rem;
+    --pad-sm: 0.8rem;
+    --pad-exsm: 0.4rem;
+
+    /* border radius */
+    
+    --br-main: 0.8rem;
+
+}
+
+.img-tc-m-sec {
+    padding-top: 7rem;
+    background: var(--c-p1-dsb);
+    height: 100vh;
+}
+.img-tc-m-hc {
+    text-align: center;
+}
+
+.img-tc-form-c {
+    margin-top: 10rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-file-btn {
+    position: relative;
+    text-align: center;
+    border: 1px solid transparent;
+    background: var(--c-p-neon);
+    padding: 0.9rem 0.8rem;
+    border-radius: var(--br-main);
+    height: 5rem;
+    width: 18rem;
+    font-size: 1.8rem;
+    overflow: hidden;
+    z-index: 50;
+}
+
+.img-file-i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Make it invisible */
+    cursor: pointer;
+    z-index: 100;
+    pointer-events: all;
+}
+
+/* dropdown */
+.custom-dropdown {
+  position: relative;
+  width: 10rem;
+}
+
+.dropdown-header {
+  padding: 0.625rem 0.938rem;
+  height: 5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--c-p1-dsb);
+  background-color: var(--c-p1-grey);
+  border: 1px solid transparent;
+  border-radius: var(--br-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.dropdown-header.open {
+  border-color: var(--c-p-neon);
+}
+.dropdown-header.close {
+  border-color: none;
+}
+
+.dropdown-header:hover {
+  border-color: var(--c-p-neon);
+}
+
+.d-list {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background-color: var(--c-p1-grey);
+  border-radius: var(--br-main);
+  box-shadow: 0px 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  margin-top: 0.313rem;
+  overflow: hidden;
+}
+
+.dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 9.375rem;
+}
+
+.dropdown-item {
+  padding: 0.7rem 0.8rem;
+  color: var(--c-p1-dsb);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--c-p-neon);
+  color: var(--c-p1-grey);
+}
+
+.dropdown-item:first-child {
+    border-top-left-radius: var(--br-main);
+    border-top-right-radius: var(--br-main);
+}
+.dropdown-item:last-child {
+    border-bottom-left-radius: var(--br-main);
+    border-bottom-right-radius: var(--br-main);
+}
+
+.file-name {
+    text-align: center;
+    padding-top: 1.2rem;
+}
