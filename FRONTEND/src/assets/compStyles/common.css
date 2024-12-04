@@ -9,23 +9,12 @@
     /* Color pallet - 1  */
 
     --c-p1-grey: #EEEDEB; /* grey */
-    --c-p1-peach: #E6B9A6; /* peach */
-    --c-p1-egb: #939185; /* Earthy Grey Beige */
     --c-p1-dsb: #2F3645; /* Deep Slate Blue */
 
     /* color pallet - 2 */
 
     --c-p2-dmb: #070F2B; /* Deep Midnight Blue */
     --c-p2-di: #1B1A55; /* Dark Indigo / Deep Violet-Blue */
-    --c-p2-msb: #535C91; /* Muted Slate Blue */
-    --c-p2-lp: #9290C3; /* Light Periwinkle */
-
-    /* color pallet - 3 */
-
-    --c-p3-dt: #003C43; /* Dark Teal */
-    --c-p3-dc: #135D66; /* Deep Cyan */
-    --c-p3-ssg: #77B0AA; /* Soft Seafoam Green */
-    --c-p3-pa: #E3FEF7; /* Pale Aquamarine */
 
     --c-p-neon: #7C00FE;
 
@@ -130,41 +119,17 @@ input[type="search"]::-webkit-search-cancel-button {
 .l {
     font-size: var(--fs-l); /* 2.2 */
 }
-.med {
-    font-size: var(--fs-med); /* 1.8 */
-}
 
 /* color classes */
 
 .txt-grey {
     color: var(--c-p1-grey);
 }
-.txt-white {
-    color: #FFF;
-}
-.txt-black {
-    color: #000;
-}
 
 /* text properties */
 
 .txt-no-ul {
     text-decoration: none;
-}
-
-/* margin classes */
-
-.mar-mt {
-    margin-top: var(--mar-m-t); /* 5rem */
-}
-.mar-ml {
-    margin-left: var(--mar-m-l); /* 10rem */
-}
-.mar-mr {
-    margin-right: var(--mar-m-r); /* 10rem */
-}
-.mar-mb {
-    margin-bottom: var(--mar-m-b); /* 5rem */
 }
 
 /* Padding classes */

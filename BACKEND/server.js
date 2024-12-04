@@ -12,7 +12,7 @@ app.use(express.json());
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-app.post("/upload-and-convert", upload.single("image"), async (req, res) => {
+app.post("/convert", upload.single("image"), async (req, res) => {
     const { format } = req.body;
     const { buffer } = req.file;
 

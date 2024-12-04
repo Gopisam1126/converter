@@ -57,7 +57,7 @@ function ImageTypeConverter() {
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/upload-and-convert",
+                "http://localhost:3000/convert",
                 formData,
                 {
                     responseType: "blob",
