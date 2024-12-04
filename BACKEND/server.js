@@ -14,17 +14,10 @@ const upload = multer({ storage });
 
 app.post("/upload-and-convert", upload.single("image"), async (req, res) => {
     const { format } = req.body;
-    console.log("format : ", format);
-    
     const { buffer } = req.file;
-    console.log("Buffer : ", buffer);
-    
 
     try {
         const convertedImage = await sharp(buffer).toFormat(format).toBuffer();
-        console.log("converted file : ", convertedImage);
-        
-
         res.set("Content-Type", `image/${format}`);
         res.send(convertedImage);
     } catch (error) {
