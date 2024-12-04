@@ -1,38 +1,38 @@
 import express from "express";
-import pkg from "pg";
-import dotenv from "dotenv";
+import multer from "multer";
+import sharp from "sharp";
 import cors from "cors";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 const app = express();
 const port = 3000;
-const { Pool } = pkg;
-
-dotenv.config();
-
-const pg = new Pool({
-    host: "localhost",
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER_NAME,
-    password: process.env.DB_PASS,
-    database: process.env.DB_BASE,
-});
-
-pg.connect((err) => {
-    if (err) {
-        console.error("Database connection failed:", err.stack);
-    } else {
-        console.log("Connected to database");
-    }
-});
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-const SECRET_KEY = process.env.SECRET_KEY;
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+app.post("/upload-and-convert", upload.single("image"), async (req, res) => {
+    const { format } = req.body;
+    console.log("format : ", format);
+    
+    const { buffer } = req.file;
+    console.log("Buffer : ", buffer);
+    
+
+    try {
+        const convertedImage = await sharp(buffer).toFormat(format).toBuffer();
+        console.log("converted file : ", convertedImage);
+        
+
+        res.set("Content-Type", `image/${format}`);
+        res.send(convertedImage);
+    } catch (error) {
+        console.error("Error during conversion:", error);
+        res.status(500).send("Image conversion failed.");
+    }
+});
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running at port ${port}`);
 });

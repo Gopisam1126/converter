@@ -22,6 +22,7 @@
     --c-p3-pa: #E3FEF7; /* Pale Aquamarine */
 
     --c-p-neon: #7C00FE;
+    --c-p-dsp-dark: #1E222C;
 
     /* Font Sizes */
 
@@ -93,7 +94,7 @@
     align-items: center;
 }
 
-.custom-file-btn {
+.custom-file-btn, .img-c-i {
     position: relative;
     text-align: center;
     border: 1px solid transparent;
@@ -193,15 +194,45 @@
     border-bottom-right-radius: var(--br-main);
 }
 
+.convert-act-c {
+    margin-left: 25rem;
+}
 .prev-img-file {
     width: 15rem;
     height: 10rem;
-    transform: translate(41rem, 2rem);
+    transform: translate(0%, 50%);
     border-radius: var(--br-main);
     border: 1px solid var(--c-p-neon);
 }
+.default-prev-c {
+    background: var(--c-p-dsp-dark);
+}
+.img-icon {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .file-name {
-    text-align: center;
     padding-top: 1.2rem;
-    transform: translateY(2rem);
+    transform: translate(0rem, 4rem);
+    width: 12rem;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.frmt-n {
+    transform: translate(12rem, 1.9rem);
+}
+
+.c-btn {
+    position: relative;
+    top: 6rem;
+    left: 50%;
+}
+.c-arr-icon-c {
+  transform: translate(110%, 90%);
+}
+.converted-img-c {
+  transform: translate(60%, -2%);
 }
