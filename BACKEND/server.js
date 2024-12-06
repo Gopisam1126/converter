@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import sharp from "sharp";
-import { PDFDocument, rgb } from "pdf-lib";
+import {PDFDocument} from "pdf-lib";
 import cors from "cors";
 
 const app = express();
@@ -30,37 +30,65 @@ app.post("/convert", upload.single("image"), async (req, res) => {
 });
 
 // endpoint to convert image to pdf using pdf-lib
-app.post("/convert-to-pdf", upload.single("image"), async (req, res) => {
+app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
+    const { mimetype, buffer } = req.file;
+
+    if (!['image/jpeg', 'image/png'].includes(mimetype)) {
+        return res.status(400).send('Invalid file type. Only JPEG and PNG are allowed.');
+    }
+
     try {
-        const { buffer } = req.file;
+        console.log('Received file with mimetype:', mimetype);
+        console.log('Buffer length:', buffer.length);
 
-        // Create a new PDF document
+        const isValidImage = await sharp(buffer).metadata()
+            .then(() => true)
+            .catch((error) => {
+                console.error('Error validating image:', error);
+                return false;
+            });
+
+        if (!isValidImage) {
+            return res.status(400).send('Invalid or corrupted image file.');
+        }
+
+        const imageBuffer = await sharp(buffer)
+            .resize({ width: 600 })  // Resize image to fit into the PDF
+            .toBuffer();
+
         const pdfDoc = await PDFDocument.create();
+        const page = pdfDoc.addPage([600, 800]); // A4
+        console.log('Image buffer for PDF:', imageBuffer.length);
 
-        // Embed the uploaded image
-        const image = await pdfDoc.embedJpg(buffer);
-        const imageDims = image.scale(1);
+        // Embed the image based on its type
+        let image;
+        if (mimetype === 'image/jpeg') {
+            image = await pdfDoc.embedJpg(imageBuffer);
+        } else if (mimetype === 'image/png') {
+            image = await pdfDoc.embedPng(imageBuffer);
+        }
 
-        // Add a page to the PDF
-        const page = pdfDoc.addPage([imageDims.width, imageDims.height]);
+        const { width, height } = image.scale(0.5);
+
+        // Draw the image onto the page
         page.drawImage(image, {
-            x: 0,
-            y: 0,
-            width: imageDims.width,
-            height: imageDims.height,
+            x: (page.getWidth() - width) / 2,
+            y: (page.getHeight() - height) / 2,
+            width,
+            height
         });
 
-        // Serialize the PDF to bytes
         const pdfBytes = await pdfDoc.save();
 
-        // Send the PDF as a response
-        res.setHeader("Content-Type", "application/pdf");
-        res.send(Buffer.from(pdfBytes));
+        res.set('Content-Type', 'application/pdf');
+        res.send(pdfBytes);
+
     } catch (error) {
-        console.error("Error during PDF conversion:", error);
-        res.status(500).send("Failed to convert image to PDF.");
+        console.error('Error during image to PDF conversion:', error);
+        res.status(500).send('Error during image conversion to PDF.');
     }
 });
+
 
 app.post("/register", async (req, res) => {
     const {firstname, lastname, setusername, setpass} = req.body;

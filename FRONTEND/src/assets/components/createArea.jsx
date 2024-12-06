@@ -14,13 +14,27 @@ function CreateArea() {
             </div>
             <div className="ca-m-body">
                 <Link to="/imgconverter" className="img-t-c-link txt-no-ul txt-grey">
+                    <div className="b-t-item b-t-i-one crsr-p transition">
+                        <ImageIcon style={{
+                            fontSize: "3rem"
+                        }}/>
+                        <h5 className="b-t-head">Image Type</h5>
+                        <span className="b-t-desc">
+                            Convet your image to any type such as JPEG, JPG, PNG, WEBP.
+                        </span>
+                    </div>
+                </Link>
+
+                {/* image to pdf converter */}
+
+                <Link to="/img-to-pdf" className="img-t-c-link txt-no-ul txt-grey">
                     <div className="b-t-item crsr-p transition">
                         <ImageIcon style={{
                             fontSize: "3rem"
                         }}/>
-                        <h5 className="b-t-head l">Image Type Converter</h5>
+                        <h5 className="b-t-head">Image to PDF</h5>
                         <span className="b-t-desc">
-                            Convet your image to any type such as JPEG, JPG, PNG, WEBP.
+                            Convet any image to PDF with the click of a button.
                         </span>
                     </div>
                 </Link>

@@ -2,6 +2,7 @@ import Home from "./assets/pages/home";
 import Login from "./assets/pages/login";
 import Signup from "./assets/pages/signup";
 import ImageTypeConverter from "./assets/components/imgType";
+import ImageToPdfConverter from "./assets/components/imgtopdf";
 import "./assets/compStyles/common.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/register" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/imgconverter" element={<ImageTypeConverter/>}/>
+          <Route path="/img-to-pdf" element={<ImageToPdfConverter/>}/>
         </Routes>
       </Router>
     </>

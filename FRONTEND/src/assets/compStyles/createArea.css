@@ -76,19 +76,29 @@
 }
 
 .ca-m-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1.1rem;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
     margin-top: 5rem;
 }
 .b-t-item {
     background: var(--c-p-dsp-dark);
-    width: 30rem;
+    width: 20rem;
+    height: 16rem;
     padding: 1.5rem;
     border-radius: var(--br-main);
 }
+.b-t-item:not(.b-t-i-one) {
+    margin-left: 2rem;
+}
 .b-t-item:hover {
     scale: 1.02;
-    /* border: 1px solid var(--c-p-neon); */
     box-shadow: 1.2rem 1.1rem 0.6rem 0.5rem var(--c-p-dsp-dark);
 }
 .b-t-head {
+    font-size: 1.5rem;
     padding-bottom: 1.2rem;
 }
