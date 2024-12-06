@@ -17,11 +17,14 @@ function ImageToPdfConverter() {
 
         try {
             const response = await axios.post('http://localhost:3000/convert-to-pdf', formData, {
-                responseType: 'blob',
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
 
-            const url = window.URL.createObjectURL(response.data);
-            setPdfUrl(url);
+            const { downloadLink } = response.data;
+
+            setPdfUrl(downloadLink);
         } catch (error) {
             console.error('Error during upload and conversion:', error);
         }
@@ -34,7 +37,9 @@ function ImageToPdfConverter() {
 
             {pdfUrl && (
                 <div>
-                    <a href={pdfUrl} download="converted-image.pdf">Download PDF</a>
+                    <a href={`http://localhost:3000${pdfUrl}`} download>
+                        Download Converted PDF
+                    </a>
                 </div>
             )}
         </div>

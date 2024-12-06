@@ -3,15 +3,28 @@ import multer from "multer";
 import sharp from "sharp";
 import {PDFDocument} from "pdf-lib";
 import cors from "cors";
+import { fileURLToPath } from 'url';
+import path from "path";
+import fs from "fs";
 
 const app = express();
 const port = 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
+const downloadDir = path.join(__dirname, "downloads");
+if (!fs.existsSync(downloadDir)) {
+  fs.mkdirSync(downloadDir);
+}
+
+app.use('/downloads', express.static(downloadDir));
 
 // endpoint to convert image to different formats
 app.post("/convert", upload.single("image"), async (req, res) => {
@@ -57,7 +70,11 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
             .toBuffer();
 
         const pdfDoc = await PDFDocument.create();
+        console.log("pdfFoc : ",pdfDoc);
+        
         const page = pdfDoc.addPage([600, 800]); // A4
+        console.log("page : ", page);
+        
         console.log('Image buffer for PDF:', imageBuffer.length);
 
         // Embed the image based on its type
@@ -68,7 +85,12 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
             image = await pdfDoc.embedPng(imageBuffer);
         }
 
-        const { width, height } = image.scale(0.5);
+        console.log("image : ", image);
+
+        const { width, height } = image.scale(1);
+        console.log("Width : ", width);
+        console.log("Height : ", height);
+        
 
         // Draw the image onto the page
         page.drawImage(image, {
@@ -79,9 +101,35 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
         });
 
         const pdfBytes = await pdfDoc.save();
+        console.log("pdf Bytes : ", pdfBytes);
+        
 
-        res.set('Content-Type', 'application/pdf');
-        res.send(pdfBytes);
+        // res.setHeader('Content-Type', 'application/pdf');
+        // res.setHeader('Content-Disposition', 'attachment; filename=converted.pdf');
+
+        // Send the PDF as the response
+        // res.send(pdfBytes);
+
+        // Save the PDF to a file on the server
+        const fileName = `converted_${Date.now()}.pdf`;
+        console.log("filename : ", fileName);
+        
+        const filePath = path.join(__dirname, 'downloads', fileName);
+        console.log("file path : ", filePath);
+        
+
+        fs.writeFileSync(filePath, pdfBytes);
+
+        // Provide a download link for the generated PDF
+        const downloadLink = `/downloads/${fileName}`;
+        console.log("download Link : ", downloadLink);
+        
+
+        // Respond with the download link
+        res.status(200).json({
+            message: 'PDF converted successfully!',
+            downloadLink
+        });
 
     } catch (error) {
         console.error('Error during image to PDF conversion:', error);
