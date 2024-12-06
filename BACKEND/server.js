@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import sharp from "sharp";
+import { PDFDocument, rgb } from "pdf-lib";
 import cors from "cors";
 
 const app = express();
@@ -12,17 +13,52 @@ app.use(express.json());
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+// endpoint to convert image to different formats
 app.post("/convert", upload.single("image"), async (req, res) => {
     const { format } = req.body;
     const { buffer } = req.file;
 
     try {
+        // convert image to selected format
         const convertedImage = await sharp(buffer).toFormat(format).toBuffer();
         res.set("Content-Type", `image/${format}`);
         res.send(convertedImage);
     } catch (error) {
         console.error("Error during conversion:", error);
         res.status(500).send("Image conversion failed.");
+    }
+});
+
+// endpoint to convert image to pdf using pdf-lib
+app.post("/convert-to-pdf", upload.single("image"), async (req, res) => {
+    try {
+        const { buffer } = req.file;
+
+        // Create a new PDF document
+        const pdfDoc = await PDFDocument.create();
+
+        // Embed the uploaded image
+        const image = await pdfDoc.embedJpg(buffer);
+        const imageDims = image.scale(1);
+
+        // Add a page to the PDF
+        const page = pdfDoc.addPage([imageDims.width, imageDims.height]);
+        page.drawImage(image, {
+            x: 0,
+            y: 0,
+            width: imageDims.width,
+            height: imageDims.height,
+        });
+
+        // Serialize the PDF to bytes
+        const pdfBytes = await pdfDoc.save();
+
+        // Send the PDF as a response
+        res.setHeader("Content-Type", "application/pdf");
+        res.send(Buffer.from(pdfBytes));
+    } catch (error) {
+        console.error("Error during PDF conversion:", error);
+        res.status(500).send("Failed to convert image to PDF.");
     }
 });
 
