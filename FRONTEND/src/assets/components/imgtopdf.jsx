@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Header from "../components/header";
 
 function ImageToPdfConverter() {
     const [file, setFile] = useState(null);
@@ -31,18 +32,23 @@ function ImageToPdfConverter() {
     };
 
     return (
-        <div>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleUploadAndConvert}>Convert to PDF</button>
+        <>
+            <div className="img-pdf-header">
+                <Header />
+            </div>
+            <div>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleUploadAndConvert}>Convert to PDF</button>
 
-            {pdfUrl && (
-                <div>
-                    <a href={`http://localhost:3000${pdfUrl}`} download>
-                        Download Converted PDF
-                    </a>
-                </div>
-            )}
-        </div>
+                {pdfUrl && (
+                    <div>
+                        <a href={`http://localhost:3000${pdfUrl}`} download>
+                            Download Converted PDF
+                        </a>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }
 
