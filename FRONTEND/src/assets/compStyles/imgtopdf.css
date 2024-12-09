@@ -1,0 +1,106 @@
+:root {
+
+    /* Color pallet - 1  */
+
+    --c-p1-grey: #EEEDEB; /* grey */
+    --c-p1-dsb: #2F3645; /* Deep Slate Blue */
+
+    /* color pallet - 2 */
+
+    --c-p2-dmb: #070F2B; /* Deep Midnight Blue */
+    --c-p2-di: #1B1A55; /* Dark Indigo / Deep Violet-Blue */
+
+    --c-p-neon: #7C00FE;
+    --c-p-dsp-dark: #1E222C;
+
+    /* Font Sizes */
+
+    --fs-h1: 5rem;
+    --fs-h2: 4rem;
+    --fs-h3: 3.2rem;
+    --fs-h4: 2.7rem;
+    --fs-l: 2.2rem;
+    --fs-med: 1.8rem;
+    --fs-p: 1.4rem;
+    --fs-input: 1.2rem;
+    --fs-nav: 1.4rem;
+    --fs-span: 1.1rem;
+
+    /* Font Family */
+
+    --ff-p: "Poppins", serif;
+    --ff-sec: "Itim", serif;
+
+    /* Margins */
+
+    --mar-m-l: 10rem;
+    --mar-m-r: 10rem;
+    --mar-m-t: 5rem;
+    --mar-m-b: 5rem;
+
+    --mar-s-l: 10rem;
+
+    --mar-h-b: 1.2rem;
+    --mar-h-t: 1.2rem;
+
+    --mar-large: 2rem;
+    --mar-sm: 0.8rem;
+    --mar-exsm: 0.4rem;
+
+    /* Paddings */
+
+    --pad-m-tb: 2rem;
+    --pad-m-lr: 5rem;
+
+    --pad-i-lr: 1.2rem;
+    --pad-i-tb: 0.3rem;
+
+    --pad-h-b: 1.2rem;
+    --pad-h-t: 1.2rem;
+
+    --pad-large: 2rem;
+    --pad-sm: 0.8rem;
+    --pad-exsm: 0.4rem;
+
+    /* border radius */
+    
+    --br-main: 0.8rem;
+
+}
+
+.img-pdf-body-c {
+    background: var(--c-p1-dsb);
+    height: 100vh;
+    padding: 8rem 5rem;
+}
+.img-pdf-bhc {
+    text-align: center;
+}
+.img-pdf-act {
+    padding: 2rem 0rem;
+    flex-direction: column;
+}
+.img-pdf-pi-c {
+    padding: 2rem 0;
+    flex-direction: column;
+    align-items: center;
+}
+.sel-prev-img, .def-pi {
+    width: 15rem;
+    height: 15rem;
+    border-radius: var(--br-main);
+    border: 1px solid var(--c-p-neon);
+}
+.view-pdf-btn {
+    border: 1px solid transparent;
+    height: 5rem;
+    width: 18rem;
+    font-size: 1.8rem;
+    background: var(--c-p-neon);
+    padding: 0.9rem 0.8rem;
+    border-radius: var(--br-main);
+    text-align: center;
+}
+.dnld-link {
+    text-decoration: none;
+}

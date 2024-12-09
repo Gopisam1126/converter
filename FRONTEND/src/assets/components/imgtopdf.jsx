@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Header from "../components/header";
+import ImageIcon from '@mui/icons-material/Image';
+import "../compStyles/imgtopdf.css";
 
 function ImageToPdfConverter() {
     const [file, setFile] = useState(null);
+    const [prevImg, setPrevImg] = useState(null);
+    const [fileName, setFileName] = useState(null);
     const [pdfUrl, setPdfUrl] = useState(null);
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files && e.target.files[0];
+        if (selectedFile) {
+            setFile(e.target.files[0]);
+            setFileName(selectedFile.name);
+            setPrevImg(URL.createObjectURL(selectedFile));
+        }
     };
 
     const handleUploadAndConvert = async () => {
@@ -33,21 +42,93 @@ function ImageToPdfConverter() {
 
     return (
         <>
-            <div className="img-pdf-header">
+            <section className="img-pdf-header">
                 <Header />
-            </div>
-            <div>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUploadAndConvert}>Convert to PDF</button>
-
-                {pdfUrl && (
-                    <div>
-                        <a href={`http://localhost:3000${pdfUrl}`} download>
-                            Download Converted PDF
-                        </a>
-                    </div>
-                )}
-            </div>
+            </section>
+            <section className='img-pdf-body-c ff-p txt-grey'>
+                <div className="img-pdf-bhc">
+                    <h3 className="img-pdf-mbh">
+                        Convert Images to PDFs
+                    </h3>
+                    <p className="img-pdf-mb-desc">
+                        convert PNG, JPEG images to pdf with ease.
+                    </p>
+                </div>
+                <div className="img-pdf-pi-c flex-c">
+                    {
+                        prevImg && fileName ? (
+                            <div className="img-fn-c">
+                                <div className="prev-img">
+                                    <img
+                                        src={prevImg}
+                                        alt="prev-img"
+                                        className='sel-prev-img'
+                                    />
+                                </div>
+                                <div className="prev-fn-c">
+                                    <p className="prev-file-name">
+                                        {fileName}
+                                    </p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div>
+                                <div className='def-pi'>
+                                    <ImageIcon
+                                        className="img-icon"
+                                        style={{
+                                            fontSize: "3rem"
+                                        }}
+                                    />
+                                </div>
+                                <div className="prev-fn">
+                                    <p>
+                                        No file chosen
+                                    </p>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+                <div className="img-pdf-act flex-c">
+                    {
+                        pdfUrl ? (
+                            <div className="custom-c-btn txt-grey crsr-p">
+                                <button className="view-pdf-btn">
+                                    <a
+                                        href={`http://localhost:3000${pdfUrl}`}
+                                        download
+                                        className='dnld-link txt-grey'
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                    >
+                                        View PDF
+                                    </a>
+                                </button>
+                            </div>
+                        ) : file ? (
+                            <div className="custom-c-btn txt-grey crsr-p">
+                                <input
+                                    type="button"
+                                    value="Convert"
+                                    className="img-c-i txt-grey crsr-p"
+                                    onClick={handleUploadAndConvert}
+                                />
+                            </div>
+                        ) : (
+                            <div className="custom-file-btn txt-grey crsr-p">
+                                Select an Image
+                                <input
+                                    type="file"
+                                    name="img-file"
+                                    className="img-file-i txt-grey"
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+                        )
+                    }
+                </div>
+            </section>
         </>
     );
 }

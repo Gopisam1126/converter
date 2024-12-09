@@ -51,8 +51,8 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
     }
 
     try {
-        console.log('Received file with mimetype:', mimetype);
-        console.log('Buffer length:', buffer.length);
+        // console.log('Received file with mimetype:', mimetype);
+        // console.log('Buffer length:', buffer.length);
 
         const isValidImage = await sharp(buffer).metadata()
             .then(() => true)
@@ -70,12 +70,12 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
             .toBuffer();
 
         const pdfDoc = await PDFDocument.create();
-        console.log("pdfFoc : ",pdfDoc);
+        // console.log("pdfFoc : ",pdfDoc);
         
         const page = pdfDoc.addPage([600, 800]); // A4
-        console.log("page : ", page);
+        // console.log("page : ", page);
         
-        console.log('Image buffer for PDF:', imageBuffer.length);
+        // console.log('Image buffer for PDF:', imageBuffer.length);
 
         // Embed the image based on its type
         let image;
@@ -85,11 +85,11 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
             image = await pdfDoc.embedPng(imageBuffer);
         }
 
-        console.log("image : ", image);
+        // console.log("image : ", image);
 
         const { width, height } = image.scale(1);
-        console.log("Width : ", width);
-        console.log("Height : ", height);
+        // console.log("Width : ", width);
+        // console.log("Height : ", height);
         
 
         // Draw the image onto the page
@@ -115,14 +115,14 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
         console.log("filename : ", fileName);
         
         const filePath = path.join(__dirname, 'downloads', fileName);
-        console.log("file path : ", filePath);
+        // console.log("file path : ", filePath);
         
 
         fs.writeFileSync(filePath, pdfBytes);
 
         // Provide a download link for the generated PDF
         const downloadLink = `/downloads/${fileName}`;
-        console.log("download Link : ", downloadLink);
+        // console.log("download Link : ", downloadLink);
         
 
         // Respond with the download link
