@@ -12,6 +12,7 @@ function WordtoPdfConverter() {
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files && e.target.files[0];
+        
         if (selectedFile) {
             setFile(e.target.files[0]);
             setFileName(selectedFile.name);
@@ -23,7 +24,7 @@ function WordtoPdfConverter() {
         if (!file) return;
 
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('wordFile', file);
 
         try {
             const response = await axios.post('http://localhost:3000/docx-to-pdf', formData, {
@@ -33,8 +34,8 @@ function WordtoPdfConverter() {
             });
 
             const { downloadLink } = response.data;
-
-            setPdfUrl(downloadLink);
+            setPdfUrl(downloadLink);          
+            
         } catch (error) {
             console.error('Error during upload and conversion:', error);
         }
@@ -97,7 +98,7 @@ function WordtoPdfConverter() {
                                 <button className="view-pdf-btn">
                                     <a
                                         href={`http://localhost:3000${pdfUrl}`}
-                                        download
+                                        // download
                                         className='dnld-link txt-grey'
                                         target="_blank" 
                                         rel="noopener noreferrer"
@@ -120,6 +121,7 @@ function WordtoPdfConverter() {
                                 Select a File
                                 <input
                                     type="file"
+                                    accept=".docx, .doc"
                                     name="img-file"
                                     className="img-file-i txt-grey"
                                     onChange={handleFileChange}

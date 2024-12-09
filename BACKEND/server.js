@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import sharp from "sharp";
 import {PDFDocument} from "pdf-lib";
+import mammoth from 'mammoth';
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import path from "path";
@@ -21,10 +22,16 @@ const upload = multer({ storage });
 
 const downloadDir = path.join(__dirname, "downloads");
 if (!fs.existsSync(downloadDir)) {
-  fs.mkdirSync(downloadDir);
+    fs.mkdirSync(downloadDir);
+}
+
+const doctopdfdl = path.join(__dirname, "doctopdf");
+if (!fs.existsSync(doctopdfdl)) {
+    fs.mkdirSync(doctopdfdl)
 }
 
 app.use('/downloads', express.static(downloadDir));
+app.use('/doctopdf', express.static(doctopdfdl));
 
 // endpoint to convert image to different formats
 app.post("/convert", upload.single("image"), async (req, res) => {
@@ -101,7 +108,7 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
         });
 
         const pdfBytes = await pdfDoc.save();
-        console.log("pdf Bytes : ", pdfBytes);
+        // console.log("pdf Bytes : ", pdfBytes);
         
 
         // res.setHeader('Content-Type', 'application/pdf');
@@ -112,7 +119,7 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
 
         // Save the PDF to a file on the server
         const fileName = `converted_${Date.now()}.pdf`;
-        console.log("filename : ", fileName);
+        // console.log("filename : ", fileName);
         
         const filePath = path.join(__dirname, 'downloads', fileName);
         // console.log("file path : ", filePath);
@@ -137,6 +144,47 @@ app.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
     }
 });
 
+app.post('/docx-to-pdf', upload.single('wordFile'), async (req, res) => {
+    const { buffer, originalname } = req.file;
+
+    if (path.extname(originalname).toLowerCase() !== '.docx') {
+        return res.status(400).send('Only .docx files are supported.');
+    }
+
+    try {
+        const { value: extractedText } = await mammoth.extractRawText({ buffer });
+
+        const pdfDoc = await PDFDocument.create();
+        const page = pdfDoc.addPage([600, 800]); // A4 size
+        console.log("page : ", page);
+
+        page.drawText(extractedText, {
+            x: 50,
+            y: 750,
+            size: 12,
+            lineHeight: 14,
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        const fileName = `converted_${Date.now()}.pdf`;
+        const filePath = path.join(__dirname, 'doctopdf', fileName);
+
+        fs.writeFileSync(filePath, pdfBytes);
+
+        // Provide a download link for the generated PDF
+        const downloadLink = `/doctopdf/${fileName}`;
+        
+
+        // Respond with the download link
+        res.status(200).json({
+            message: 'PDF converted successfully!',
+            downloadLink
+        });
+    } catch (error) {
+        console.error('Error converting Word to PDF:', error);
+        res.status(500).send('Error during Word to PDF conversion.');
+    }
+});
 
 app.post("/register", async (req, res) => {
     const {firstname, lastname, setusername, setpass} = req.body;
