@@ -77,8 +77,7 @@
 
 .ca-m-body {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     justify-content: center;
     align-items: start;
     padding: 20px;
@@ -91,9 +90,12 @@
     padding: 1.5rem;
     border-radius: var(--br-main);
 }
-.b-t-item:not(.b-t-i-one) {
+/* .b-t-i3 {
     margin-left: 2rem;
 }
+.b-t-item:not(.b-t-i-one) {
+    margin-left: 2rem;
+} */
 .b-t-item:hover {
     scale: 1.02;
     box-shadow: 1.2rem 1.1rem 0.6rem 0.5rem var(--c-p-dsp-dark);

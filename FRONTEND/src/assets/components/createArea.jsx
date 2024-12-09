@@ -38,6 +38,22 @@ function CreateArea() {
                         </span>
                     </div>
                 </Link>
+
+                {/* word to pdf converter */}
+
+                <Link to="/docx-to-pdf" className="img-t-c-link txt-no-ul txt-grey">
+                    <div className="b-t-item b-t-i3 crsr-p transition">
+                        <ImageIcon style={{
+                            fontSize: "3rem"
+                        }}/>
+                        <h5 className="b-t-head">Word to PDF</h5>
+                        <span className="b-t-desc">
+                            Convet any Word documents to PDF with the click of a button.
+                        </span>
+                    </div>
+                </Link>
+
+
             </div>
         </section>
     </>
